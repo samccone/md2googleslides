@@ -289,7 +289,7 @@ inlineTokenRules['bullet_list_open'] = inlineTokenRules['ordered_list_open'] = (
   context.startStyle(style);
   if (context.list) {
     if (context.list.tag !== token.tag) {
-      throw new Error('Nested lists must match parent style');
+      console.warn(`Nested lists must match parent style at ${context.text.rawText}`);
     }
     context.list.depth += 1;
   } else {
