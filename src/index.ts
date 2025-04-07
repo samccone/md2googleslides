@@ -16,15 +16,13 @@
 
 /* eslint-disable no-console, @typescript-eslint/no-var-requires */
 
-const Promise = require('promise');
 const fs = require('fs');
 const fsp = require('fs').promises;
 const path = require('path');
-const process = require('process');
 const ArgumentParser = require('argparse').ArgumentParser;
 const {authenticate} = require('@google-cloud/local-auth');
 const {google} = require('googleapis');
-const SlideGenerator = require('../lib/slide_generator').default;
+import SlideGenerator from './slide_generator';
 const opener = require('opener');
 
 const SCOPES = [
@@ -41,68 +39,98 @@ const STORED_CREDENTIALS_PATH = path.join(
 );
 
 const parser = new ArgumentParser({
-  version: '1.0.0',
-  addHelp: true,
+  add_help: true,
   description: 'Markdown to Slides converter',
 });
 
-parser.addArgument([
+parser.add_argument(
   '-f',
-  '--file'],
+  '--file',
   {
     help: 'Path to markdown file to convert',
     required: true,
   },
 );
 
-parser.addArgument(['-u', '--user'], {
-  help: 'Email address of user',
-  required: false,
-  dest: 'user',
-  defaultValue: 'default',
-});
-parser.addArgument(['-a', '--append'], {
-  dest: 'id',
-  help: 'Appends slides to an existing presentation',
-  required: false,
-});
-parser.addArgument(['-e', '--erase'], {
-  dest: 'erase',
-  action: 'storeTrue',
-  help: 'Erase existing slides prior to appending.',
-  required: false,
-});
-parser.addArgument(['-n', '--no-browser'], {
-  action: 'storeTrue',
-  dest: 'headless',
-  help: 'Headless mode - do not launch browsers, just shows URLs',
-  required: false,
-});
-parser.addArgument(['-s', '--style'], {
-  help: 'Name of highlight.js theme for code formatting',
-  dest: 'style',
-  required: false,
-  defaultValue: 'default',
-});
-parser.addArgument(['-t', '--title'], {
-  help: 'Title of the presentation',
-  dest: 'title',
-  required: false,
-});
-parser.addArgument(['-c', '--copy'], {
-  help: 'Id of the presentation to copy and use as a base',
-  dest: 'copy',
-  required: false,
-});
+parser.add_argument(
+  '-u',
+  '--user',
+  {
+    help: 'Email address of user',
+    required: false,
+    dest: 'user',
+    default: 'default',
+  },
+);
+parser.add_argument(
+  '-a',
+  '--append',
+  {
+    dest: 'id',
+    help: 'Appends slides to an existing presentation',
+    required: false,
+  },
+);
+parser.add_argument(
+  '-e',
+  '--erase',
+  {
+    dest: 'erase',
+    action: 'store_true',
+    help: 'Erase existing slides prior to appending.',
+    required: false,
+  },
+);
+parser.add_argument(
+  '-n',
+  '--no-browser',
+  {
+    action: 'store_true',
+    dest: 'headless',
+    help: 'Headless mode - do not launch browsers, just shows URLs',
+    required: false,
+  },
+);
+parser.add_argument(
+  '-s',
+  '--style',
+  {
+    help: 'Name of highlight.js theme for code formatting',
+    dest: 'style',
+    required: false,
+    default: 'default',
+  },
+);
+parser.add_argument(
+  '-t',
+  '--title',
+  {
+    help: 'Title of the presentation',
+    dest: 'title',
+    required: false,
+  },
+);
+parser.add_argument(
+  '-c',
+  '--copy',
+  {
+    help: 'Id of the presentation to copy and use as a base',
+    dest: 'copy',
+    required: false,
+  },
+);
 
-parser.addArgument(['--client_id'], {
-  help: 'Path to client credentials file',
-  dest: 'client_id',
-  required: false,
-  defaultValue: path.join(USER_HOME, '.md2googleslides', 'client_id.json'),
-});
+parser.add_argument(
+  '--client_id',
+  {
+    help: 'Path to client credentials file',
+    dest: 'client_id',
+    required: false,
+    default: path.join(USER_HOME, '.md2googleslides', 'client_id.json'),
+  },
+);
 
-const args = parser.parseArgs();
+const args = parser.parse_args();
 
 const STORED_CLIENT_ID_PATH = args.client_id;
 
