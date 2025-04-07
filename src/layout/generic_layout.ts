@@ -294,6 +294,9 @@ export default class GenericLayout {
     // TODO - Fix weird cast
     const layer = (Layout as (s: string) => Layout.PackingSmith)('left-right'); // TODO - Configurable?
     for (const image of images) {
+      // TODO fix this.. but adding some size seems to make slides happy
+      image.width = 200;
+      image.height = 200;
       debug('Slide #%d: adding inline image %s', this.slide.index, image.url);
       layer.addItem({
         width: image.width + image.padding * 2,
