@@ -47,3 +47,4 @@ jspm_packages
 lib
 
 client_id.json
+bin/
