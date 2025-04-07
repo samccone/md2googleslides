@@ -123,10 +123,10 @@ export default class GenericLayout {
         const placeholder = bodyElements![i];
         const body = this.slide.bodies[i];
         this.appendFillPlaceholderTextRequest(body.text, placeholder, requests);
-        if (body.images && body.images.length) {
+        if (body.images?.length) {
           this.appendCreateImageRequests(body.images, placeholder, requests);
         }
-        if (body.videos && body.videos.length) {
+        if (body.videos?.length) {
           this.appendCreateVideoRequests(body.videos, placeholder, requests);
         }
       }
