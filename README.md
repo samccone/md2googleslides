@@ -276,6 +276,14 @@ Unordered lists:
   * Item 2.1
 </pre>
 
+You **CAN NOT** mix ordered and unordered lists when nesting lists. For example this is invalid:
+<pre>
+* Item 1
+    1. INVALID Item 1.1
+* Item 2
+    2. INVALID Item 2.1
+</pre>
+
 Additionally, a subset of inline HTML tags are supported for styling.
 
 * `<span>`
