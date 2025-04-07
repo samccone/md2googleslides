@@ -39,11 +39,6 @@ const STORED_CREDENTIALS_PATH = path.join(
   '.md2googleslides',
   'credentials.json'
 );
-const STORED_CLIENT_ID_PATH = path.join(
-  USER_HOME,
-  '.md2googleslides',
-  'client_id.json'
-);
 
 const parser = new ArgumentParser({
   version: '1.0.0',
@@ -98,10 +93,17 @@ parser.addArgument(['--use-fileio'], {
   help: 'Acknolwedge local and generated images are uploaded to https://file.io',
   action: 'storeTrue',
   dest: 'useFileio',
+
+parser.addArgument(['--client_id'], {
+  help: 'Path to client credentials file',
+  dest: 'client_id',
   required: false,
+  defaultValue: path.join(USER_HOME, '.md2googleslides', 'client_id.json'),
 });
 
 const args = parser.parseArgs();
+
+const STORED_CLIENT_ID_PATH = args.client_id;
 
 function handleError(err) {
   console.log('Unable to generate slides:', err);
