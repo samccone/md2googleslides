@@ -371,54 +371,6 @@ Birds  | 16 million
 </pre>
 
 
-### Local images
-
-Images referencing local paths temporarily uploaded and hosted to [file.io](https://file.io). File.io is an ephemeral file serving service that generates short-lived random URLs to the upload file and deletes content shortly after use.
-
-Since local images are uploaded to a third party, explicit opt-in is required to use this feature. Include the `--use-fileio` option to opt-in to uploading images. This applies to file-based images as well
-as automatically rasterized content like math expressions and SVGs.
-
-
-### Image rasterization
-
-Slides can also include generated images, using `$$$` fenced blocks for the data. Currently supported generated images are math expression (TeX and MathML) as well as SVG. Rasterized images are treated like local images are require opt-in to uploading images to a 3rd party service via the `--use-fileio` option.
-
-Using TeX:
-
-<pre>
-# How about some math?
-
-$$$ math
-\cos (2\theta) = \cos^2 \theta - \sin^2 \theta
-$$$
-</pre>
-
-SVG
-
-<pre>
-# Or some SVG?
-
-$$$ svg
-&lt;svg xmlns="http://www.w3.org/2000/svg"
-     xmlns:xlink="http://www.w3.org/1999/xlink"
-     viewBox="0 0 48 48">
-  &lt;defs>
-    &lt;path id="a" d="M44.5 20H24v8.5h11.8C34.7 33.9 30.1 37 24 37c-7.2 0-13-5.8-13-13s5.8-13 13-13c3.1 0 5.9 1.1 8.1 2.9l6.4-6.4C34.6 4.1 29.6 2 24 2 11.8 2 2 11.8 2 24s9.8 22 22 22c11 0 21-8 21-22 0-1.3-.2-2.7-.5-4z"/>
-  &lt;/defs>
-  &lt;clipPath id="b">
-    &lt;use xlink:href="#a" overflow="visible"/>
-  &lt;/clipPath><path clip-path="url(#b)" fill="#FBBC05" d="M0 37V11l17 13z"/>
-  &lt;path clip-path="url(#b)" fill="#EA4335" d="M0 11l17 13 7-6.1L48 14V0H0z"/>
-  &lt;path clip-path="url(#b)" fill="#34A853" d="M0 37l30-23 7.9 1L48 0v48H0z"/>
-  &lt;path clip-path="url(#b)" fill="#4285F4" d="M48 48L17 24l-4-3 35-10z"/>
-&lt;/svg>
-$$$
-</pre>
-
-Like local images, generated images are temporarily served via file.io.
-
-Pull requests for other image generators (e.g. mermaid, chartjs, etc.) are welcome!
-
 ## Reading from standard input
 
 You can also pipe markdown into the tool by omitting the file name argument.

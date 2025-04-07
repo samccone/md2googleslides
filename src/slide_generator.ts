@@ -16,31 +16,12 @@ import Debug from 'debug';
 import extractSlides from './parser/extract_slides';
 import {SlideDefinition, ImageDefinition} from './slides';
 import matchLayout from './layout/match_layout';
-import {URL} from 'url';
 import {google, slides_v1 as SlidesV1} from 'googleapis';
 import {OAuth2Client} from 'google-auth-library';
 import assert from 'assert';
 
 const debug = Debug('md2gslides');
 
-/**
- * Generates slides from Markdown or HTML. Requires an authorized
- * oauth2 client.
- *
- * @example
- *
- *   var SlideGenerator = require('md2slides');
- *   var fs = require('fs');
- *
- *   var oauth2Client = ...; // See Google API client for details
- *   var generator = SlideGenerator.newPresentation(oauth2Client);
- *   var markdown = fs.readFileSync('mydeck.md');
- *   generator.generateFromMarkdown(markdown).then(function(id) {
- *     console.log("Presentation ID: " + id);
- *   });
- *
- * @see https://github.com/google/google-api-nodejs-client
- */
 export default class SlideGenerator {
   private slides: SlideDefinition[] = [];
   private api: SlidesV1.Slides;
