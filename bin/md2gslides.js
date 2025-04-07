@@ -46,10 +46,15 @@ const parser = new ArgumentParser({
   description: 'Markdown to Slides converter',
 });
 
-parser.addArgument('file', {
-  help: 'Path to markdown file to convert, If omitted, reads from stdin',
-  nargs: '?',
-});
+parser.addArgument([
+  '-f',
+  '--file'],
+  {
+    help: 'Path to markdown file to convert',
+    required: true,
+  },
+);
+
 parser.addArgument(['-u', '--user'], {
   help: 'Email address of user',
   required: false,
