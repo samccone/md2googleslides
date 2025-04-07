@@ -75,6 +75,9 @@ function hasContent(slide?: SlideDefinition): boolean {
 
 // Define rules for picking slide layouts based on the default
 // layouts in Slides.
+//   "TITLE", "SECTION_HEADER", "TITLE_AND_BODY", "TITLE_AND_TWO_COLUMNS",
+//   "TITLE_ONLY", "ONE_COLUMN_TEXT", "MAIN_POINT", "SECTION_TITLE_AND_DESCRIPTION",
+//   "CAPTION_ONLY", "BIG_NUMBER", "BLANK", "TITLE_1"
 // NOTE: Order matters since first match wins.
 
 defineLayout(
@@ -103,5 +106,14 @@ defineLayout(
 defineLayout(
   'TITLE_AND_BODY',
   slide => hasText(slide.title) || slide.bodies.length !== 0
+);
+defineLayout(
+  'MAIN_POINT',
+  slide => hasBigTitle(slide) && !hasContent(slide)
+);
+// a lot of overlap with title and body
+defineLayout(
+  'ONE_COLUMN_TEXT',
+  slide => hasText(slide.title) && slide.bodies.length === 1
 );
 defineLayout('BLANK', () => true);

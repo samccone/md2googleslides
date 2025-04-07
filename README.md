@@ -144,6 +144,17 @@ Add `{.big}` to the title to make a slide with one big point
 
 ![Main point slide](https://github.com/googlesamples/md2googleslides/raw/master/examples/main_point_slide.png)
 
+#### Big text slide
+
+Use `{.big}` on a `#` header in combination with no body.
+
+<pre>
+    ---
+
+    # 100% {.big}
+</pre>
+
+
 #### Big number slide
 
 Use `{.big}` on a header in combination with a body too.
