@@ -17,21 +17,23 @@ import Token from 'markdown-it/lib/token';
 // @ts-ignore
 import attrs from 'markdown-it-attrs';
 // @ts-ignore
-import video from 'markdown-it-video';
+import lazyHeaders from 'markdown-it-lazy-headers';
 // @ts-ignore
-import customFence from 'markdown-it-fence';
-
+import expandTabs from 'markdown-it-expand-tabs';
+// @ts-ignore
+import video from 'markdown-it-video';
 
 const mdOptions = {
-  htm: true,
+  html: true,
   langPrefix: 'highlight ',
-  linkify: true,
-  typographer: true,
+  linkify: false,
   breaks: false,
 };
 
 const parser = markdownIt(mdOptions)
   .use(attrs)
+  .use(lazyHeaders)
+  .use(expandTabs)
   .use(video, {youtube: {width: 640, height: 390}});
 
 function parseMarkdown(markdown: string): Token[] {
