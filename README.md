@@ -1,17 +1,8 @@
-Generate Google Slides from markdown & HTML. Run from the command line or embed in another application. This project was developed as an example of how to use the [Google Slides (REST) API](https://developers.google.com/slides). While it does not yet produce stunningly beautiful decks, you are encouraged to use this tool for quickly prototyping presentations. Contributions are welcome.
-
-**NOTE**: This is a fork of the original repo at <https://github.com/googleworkspace/md2googleslides>. The project is still "actively" maintained, but some users can't wait for the PRs from the original maintainer. Upstream changes will be merged as necessary.
-
+Generate Google Slides from markdown 
 
 ## Installation and usage
 
-For command line use, install `md2gslides` globally:
-
-```sh
-npm install -g @wescpy/md2gslides
-```
-
-Then get your OAuth client ID credentials:
+Get your OAuth client ID credentials:
 
 * Create (or reuse) a developer project at <https://console.developers.google.com>
 * Enable Google Slides API at [API library page](https://console.developers.google.com/apis/library)
@@ -19,56 +10,17 @@ Then get your OAuth client ID credentials:
 * Create "OAuth client ID" type of credentials.
 * Choose type "Computer Application" and give it some name.
 * Download client ID/secret file and shorten the name to: `client_id.json`.
-* Move `client_id.json` (name has to be exact) to `~/.md2googleslides`.
+* Move `client_id.json` onto your disk.
 
 After installing, import your slides by running:
 
 ```sh
-md2gslides slides.md
+bun src/index.ts -f examples/example.md --client_id client_id.json
 ```
 
-You'll get a slide deck named "slides.md".
+You'll get a slide deck named "example.md".
 
 > NOTE: The first time you run the `md2gslides` command, you will be prompted for authorization. OAuth token credentials are stored in `~/.md2googleslides/credentials.json`. You may get a "scary-looking" screen that says, "Google hasn't verified this app." Click "Advanced" then "Go to _APP-NAME_ (unsafe)" if you trust yourself as the author of the app that's requesting to access your Slides files in Drive.
-
-
-If you want to give the presentation a different name, use the `--title` option:
-
-```sh
-md2gslides slides.md --title "Talk Title"
-```
-
-This will generate new Google Slides in your account with title `Talk Title`.
-
-Each time you run `md2gslides`, a new slide deck will be generated. If you want to append to or replace an existing slide deck, get the Drive file ID of that deck. The file ID is the 44-character string in a presentation's URL. For example, for this slide deck URL: `https://docs.google.com/presentation/d/1EAYk18WDjIG-zp_0vLm3CsfQh_i8eXc67Jo2O9C6Vuc/edit`, its file ID is `1EAYk18WDjIG-zp_0vLm3CsfQh_i8eXc67Jo2O9C6Vuc`.
-
-Let's say you made some additional slides in `slides2.md`. To generate those slides and append to your existing deck, run:
-
-```sh
-md2gslides slides2.md --append FILE_ID
-```
-
-To regenerate and replace a deck you've created with file ID `FILE_ID`, run:
-
-```sh
-md2gslides slides.md --erase --append FILE_ID
-```
-
-Each time you run the `md2gslides` command, the newly-created or edited slide deck will open in a new browser tab. If you want to suppress that from happening because you already have it open in an existing tab, issue the `--no-browser` option. This command replaces an existing deck but doesn't open up a new browser tab:
-
-```sh
-md2gslides slides.md --no-browser --erase --append FILE_ID
-```
-
-If you're an advanced user, you can use the shorter alternative 1-character options:
-
-```sh
-md2gslides slides.md -nea FILE_ID -t "Talk Title"
-```
-
-
-Images (see syntax below) are expected to be online (have URLs), but if you have local files you wish you use the `--use-fileio` option. More info on this option down below in the [Local images](#local-images) section.
-
 
 ## Supported markdown rules
 
@@ -393,38 +345,6 @@ Birds  | 16 million
 ## Reading from standard input
 
 You can also pipe markdown into the tool by omitting the file name argument.
-
-## Contributing
-
-With the exception of `/bin/md2gslides.js`, TypeScript is used throughout and compiled
-with [Babel](https://babeljs.io/). [Mocha](https://mochajs.org/) and [Chai](http://chaijs.com/)
-are used for testing.
-
-Before anything, ensure you have all dependencies:
-
-```sh
-npm install
-```
-
-To compile:
-
-```sh
-npm run compile
-```
-
-To run unit tests:
-
-```sh
-npm run test
-```
-
-To lint/format tests:
-
-```sh
-npm run lint
-```
-
-See [CONTRIBUTING](CONTRIBUTING.md) for additional terms.
 
 ## License
 
