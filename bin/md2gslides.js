@@ -16,8 +16,6 @@
 
 /* eslint-disable no-console, @typescript-eslint/no-var-requires */
 
-require('babel-polyfill');
-
 const Promise = require('promise');
 const fs = require('fs');
 const fsp = require('fs').promises;
