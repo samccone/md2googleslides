@@ -202,7 +202,7 @@ export default class SlideGenerator {
         return;
       }
       if (!this.allowUpload) {
-        return Promise.reject('Local images require --use-fileio option');
+        return Promise.reject(`Local images not supported: ${image.url}`);
       }
       image.url = await uploadLocalImage(parsedUrl.pathname);
     };
