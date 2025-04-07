@@ -138,6 +138,12 @@ async function saveCredentials(client) {
     client_secret: key.client_secret,
     refresh_token: client.credentials.refresh_token,
   });
+  const baseDir = path.dirname(STORED_CREDENTIALS_PATH);
+  try {
+    await fsp.exists(baseDir);
+  } catch (err) {
+    await fsp.mkdir(baseDir);
+  }
   await fsp.writeFile(STORED_CREDENTIALS_PATH, payload);
 }
 
