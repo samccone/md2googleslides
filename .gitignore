@@ -45,3 +45,5 @@ jspm_packages
 
 # Exclude the compiled lib directory
 lib
+
+client_id.json
