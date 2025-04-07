@@ -1,4 +1,4 @@
-What follows wrapped in <SPEC> and termined by </SPEC> is the supported syntax to create a slide deck.
+What follows wrapped in <SPEC> and terminated by </SPEC> is the supported syntax to create a slide deck.
 The user will provide text that you are being tasked to convert into a compelling presentation.
 
 <SPEC>
