@@ -145,23 +145,6 @@ export default class SlideGenerator {
     });
   }
 
-  protected async processImages<T>(
-    fn: (img: ImageDefinition) => Promise<T>
-  ): Promise<void> {
-    const promises = [];
-    for (const slide of this.slides) {
-      if (slide.backgroundImage) {
-        promises.push(fn(slide.backgroundImage));
-      }
-      for (const body of slide.bodies) {
-        for (const image of body.images) {
-          promises.push(fn(image));
-        }
-      }
-    }
-    await Promise.all(promises);
-  }
-
   /**
    * 1st pass at generation -- creates slides using the apporpriate
    * layout based on the content.
