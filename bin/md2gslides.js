@@ -89,10 +89,6 @@ parser.addArgument(['-c', '--copy'], {
   dest: 'copy',
   required: false,
 });
-parser.addArgument(['--use-fileio'], {
-  help: 'Acknolwedge local and generated images are uploaded to https://file.io',
-  action: 'storeTrue',
-  dest: 'useFileio',
 
 parser.addArgument(['--client_id'], {
   help: 'Path to client credentials file',
@@ -231,6 +227,7 @@ function displayResults(id) {
     opener(url);
   }
 }
+
 authorize()
   .then(buildSlideGenerator)
   .then(eraseIfNeeded)
