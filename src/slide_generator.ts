@@ -18,10 +18,7 @@ import {SlideDefinition, ImageDefinition} from './slides';
 import matchLayout from './layout/match_layout';
 import {URL} from 'url';
 import {google, slides_v1 as SlidesV1} from 'googleapis';
-import uploadLocalImage from './images/upload';
 import {OAuth2Client} from 'google-auth-library';
-import probeImage from './images/probe';
-import maybeGenerateImage from './images/generate';
 import assert from 'assert';
 
 const debug = Debug('md2gslides');
@@ -129,19 +126,14 @@ export default class SlideGenerator {
    *
    * @param {String} markdown Markdown to import
    * @param css
-   * @param useFileio
    * @returns {Promise.<String>} ID of generated slide
    */
   public async generateFromMarkdown(
     markdown: string,
-    {css, useFileio}: {css: string; useFileio: boolean}
+    {css}: {css: string}
   ): Promise<string> {
     assert(this.presentation?.presentationId);
     this.slides = extractSlides(markdown, css);
-    this.allowUpload = useFileio;
-    await this.generateImages();
-    await this.probeImageSizes();
-    await this.uploadLocalImages();
     await this.updatePresentation(this.createSlides());
     await this.reloadPresentation();
     await this.updatePresentation(this.populateSlides());
@@ -187,39 +179,6 @@ export default class SlideGenerator {
       }
     }
     await Promise.all(promises);
-  }
-  protected async generateImages(): Promise<void> {
-    return this.processImages(maybeGenerateImage);
-  }
-
-  protected async uploadLocalImages(): Promise<void> {
-    const uploadImageifLocal = async (
-      image: ImageDefinition
-    ): Promise<void> => {
-      assert(image.url);
-      const parsedUrl = new URL(image.url);
-      if (parsedUrl.protocol !== 'file:') {
-        return;
-      }
-      if (!this.allowUpload) {
-        return Promise.reject(`Local images not supported: ${image.url}`);
-      }
-      image.url = await uploadLocalImage(parsedUrl.pathname);
-    };
-    return this.processImages(uploadImageifLocal);
-  }
-
-  /**
-   * Fetches the image sizes for each image in the presentation. Allows
-   * for more accurate layout of images.
-   *
-   * Image sizes are stored as data attributes on the image elements.
-   *
-   * @returns {Promise.<*>}
-   * @private
-   */
-  protected async probeImageSizes(): Promise<void> {
-    return this.processImages(probeImage);
   }
 
   /**
