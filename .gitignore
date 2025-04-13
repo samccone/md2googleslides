@@ -48,3 +48,5 @@ lib
 
 client_id.json
 bin/
+
+examples/bap*

@@ -26,7 +26,6 @@ export default class SlideGenerator {
   private slides: SlideDefinition[] = [];
   private api: SlidesV1.Slides;
   private presentation: SlidesV1.Schema$Presentation;
-  private allowUpload = false;
   /**
    * @param {Object} api Authorized API client instance
    * @param {Object} presentation Initial presentation data
@@ -43,15 +42,18 @@ export default class SlideGenerator {
   /**
    * Returns a generator that writes to a new blank presentation.
    *
-   * @param {OAuth2Client} oauth2Client User credentials
+   * @param {OAuth2Client|SlidesV1.Slides} oauth2ClientOrApi User credentials or API instance
    * @param {string} title Title of presentation
    * @returns {Promise.<SlideGenerator>}
    */
   public static async newPresentation(
-    oauth2Client: OAuth2Client,
+    oauth2ClientOrApi: OAuth2Client | SlidesV1.Slides,
     title: string
   ): Promise<SlideGenerator> {
-    const api = google.slides({version: 'v1', auth: oauth2Client});
+    const api = oauth2ClientOrApi instanceof OAuth2Client 
+      ? google.slides({version: 'v1', auth: oauth2ClientOrApi})
+      : oauth2ClientOrApi;
+    
     const res = await api.presentations.create({
       requestBody: {
         title: title,
