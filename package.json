@@ -49,7 +49,7 @@
     "markdown-it-fence": "^0.1.3",
     "markdown-it-lazy-headers": "^0.1.3",
     "markdown-it-video": "^0.6.3",
-    "native-css": "^2.0.0",
+    "native-css": "samccone/native-css",
     "opener": "^1.4.2",
     "parse-color": "^1.0.0",
     "parse5": "^6.0.1",
