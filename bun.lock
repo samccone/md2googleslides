@@ -672,7 +672,7 @@
 
     "nanoid": ["nanoid@3.1.23", "", { "bin": "bin/nanoid.cjs" }, "sha512-FiB0kzdP0FFVGDKlRLEQ1BgDzU87dy5NnzjeW9YZNt+/c3+q82EQDUwniSAUxp/F0gFNI1ZhKU1FqYsMuqZVnw=="],
 
-    "native-css": ["native-css@github:samccone/native-css#02145bf", { "dependencies": { "css": "2.2.1", "fetch": "^1.0.1" }, "bin": "./bin/native-css.js" }, "samccone-native-css-02145bf"],
+    "native-css": ["native-css@github:samccone/native-css#2733bb7", { "dependencies": { "css": "2.2.1", "fetch": "^1.0.1" }, "bin": "./bin/native-css.js" }, "samccone-native-css-2733bb7"],
 
     "natural-compare": ["natural-compare@1.4.0", "", {}, ""],
 
