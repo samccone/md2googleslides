@@ -1,0 +1,95 @@
+{
+  "name": "@wescpy/md2gslides",
+  "engines": {
+    "node": ">=12.0.0"
+  },
+  "version": "0.6.0",
+  "description": "Convert Markdown to Google Slides",
+  "main": "index.js",
+  "files": [
+    "index.js",
+    "bin/",
+    "lib/",
+    "LICENSE",
+    "README.md",
+    "CONTRIBUTING.md",
+    "CHANGELOG.md"
+  ],
+  "scripts": {
+    "build": "bun build src/index.ts --outdir bin --target=node",
+    "test": "mocha --require ./test/register --timeout 5000 \"test/**/*.spec.ts\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com//googlesamples/md2googleslides"
+  },
+  "keywords": [
+    "markdown",
+    "google",
+    "slides"
+  ],
+  "author": "Steven Bazyl",
+  "license": "Apache-2.0",
+  "dependencies": {
+    "@google-cloud/local-auth": "^2.1.1",
+    "debug": "^4.4.0",
+    "extend": "^3.0.2",
+    "file-url": "^3.0.0",
+    "google-auth-library": "^7.14.1",
+    "googleapis": "^78.0.0",
+    "highlight.js": "^10.7.3",
+    "inline-styles-parse": "^1.2.0",
+    "jsonfile": "^6.1.0",
+    "layout": "^2.2.0",
+    "lodash": "^4.17.21",
+    "lowlight": "^1.20.0",
+    "markdown-it": "^14.1.0",
+    "markdown-it-attrs": "^4.3.1",
+    "markdown-it-expand-tabs": "^1.0.13",
+    "markdown-it-fence": "^0.1.3",
+    "markdown-it-lazy-headers": "^0.1.3",
+    "markdown-it-video": "^0.6.3",
+    "native-css": "samccone/native-css",
+    "opener": "^1.5.2",
+    "parse-color": "^1.0.0",
+    "parse5": "^6.0.1",
+    "promise-retry": "^2.0.1",
+    "request": "^2.88.2",
+    "request-promise-native": "^1.0.9",
+    "tmp-promise": "^3.0.3",
+    "uuid": "^8.3.2"
+  },
+  "overrides": {
+    "native-css": "samccone/native-css"
+  },
+  "devDependencies": {
+    "@types/chai": "^4.3.20",
+    "@types/chai-as-promised": "^7.1.8",
+    "@types/chai-subset": "^1.3.6",
+    "@types/debug": "^4.1.12",
+    "@types/extend": "^3.0.4",
+    "@types/jsonfile": "^6.1.4",
+    "@types/lodash": "^4.17.16",
+    "@types/lowlight": "^0.0.2",
+    "@types/markdown-it": "12.0.2",
+    "@types/mocha": "^8.2.3",
+    "@types/node": "15.12.4",
+    "@types/parse-color": "^1.0.3",
+    "@types/parse5": "^6.0.3",
+    "@types/promise-retry": "^1.1.6",
+    "@types/request-promise-native": "^1.0.21",
+    "@types/tmp": "^0.2.6",
+    "@types/uuid": "^8.3.4",
+    "argparse": "^2.0.1",
+    "chai": "4.3.4",
+    "chai-as-promised": "7.1.1",
+    "chai-subset": "1.6.0",
+    "gts": "3.1.0",
+    "mocha": "9.0.1",
+    "nock": "13.1.0",
+    "typescript": "4.3.4"
+  },
+  "bin": {
+    "md2gslides": "bin/index.js"
+  }
+}

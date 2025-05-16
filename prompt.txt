@@ -1,0 +1,282 @@
+What follows wrapped in <SPEC> and terminated by </SPEC> is the supported syntax to create a slide deck.
+The user will provide text that you are being tasked to convert into a compelling presentation.
+
+<SPEC>
+    ## Slides
+
+    Each slide is typically represented by a header, followed by zero or more block elements.
+
+    Begin a new slide with a horizontal rule (`---`). The separator
+    may be omitted for the first slide.
+
+    The following examples show how to create slides of various layouts:
+
+    ### Supported slide formats
+
+    #### Title slide
+
+    <pre>
+        ---
+
+        # This is a title slide
+        ## Your name here
+    </pre>
+
+    #### Section title slides
+
+    <pre>
+        ---
+
+        # This is a section title
+    </pre>
+
+
+    #### Section title & body slides
+
+    <pre>
+        ---
+
+        # Section title & body slide
+
+        ## This is a subtitle
+
+        This is the body
+    </pre>
+
+
+    #### Title & body slides
+
+    <pre>
+        ---
+
+        # Title & body slide
+
+        This is the slide body.
+    </pre>
+
+
+    #### Main point slide
+
+    Add `{.big}` to the title to make a slide with one big point
+
+    <pre>
+        ---
+
+        # This is the main point {.big}
+    </pre>
+
+
+    #### Big number slide
+
+    Use `{.big}` on a header in combination with a body too.
+
+    <pre>
+        ---
+
+        # 100% {.big}
+
+        This is the body
+    </pre>
+
+
+    #### Big text slide
+
+    Use `{.big}` on a `#` header in combination with no body.
+
+    <pre>
+        ---
+
+        # 100% {.big}
+    </pre>
+
+    #### Two column slides
+
+    Separate columns with `{.column}`. The marker must appear
+    on its own line with a blank both before and after.
+
+    <pre>
+        ---
+
+        # Two column layout
+
+        This is the left column
+
+        {.column}
+
+        This is the right column
+    </pre>
+
+    ### Images
+
+    #### Inline images
+
+    Images can be placed on slides using image tags. Multiple images can be included. Mulitple images in a single paragraph are arranged in columns, multiple paragraphs arranged as rows. **NOTE:** Images are currently scaled and centered to fit the
+    slide template.
+
+    <pre>
+        ---
+
+        # Slides can have images
+        ![](https://placehold.co/400x200/CCCCCC/000000?text=Some Text)
+    </pre>
+
+    #### Background images
+
+    Set the background image of a slide by adding `{.background}` to
+    the end of an image URL.
+
+    <pre>
+        ---
+
+        # Slides can have background images
+
+        
+        ![](https://placehold.co/400x200/CCCCCC/000000.png?text=Some Text){.background}
+    </pre>
+
+    ### Videos
+
+    Include YouTube videos with a modified image tag.
+
+    <pre>
+        ---
+
+        # Slides can have videos
+
+        @[youtube](MG8KADiRbOU)
+    </pre>
+
+    ### Speaker notes
+
+    Include speaker notes for a slide using HTML comments. Text inside
+    the comments may include markdown for formatting, though only text
+    formatting is allowed. Videos, images, and tables are ignored inside
+    speaker notes.
+
+    <pre>
+        ---
+
+        # Slide title
+
+        ![](https://placehold.co/400x200/CCCCCC/000000.png?text=Some Text){.background}
+
+        &lt;!--
+        These are speaker notes.
+        --&gt;
+    </pre>
+
+    ### Formatting
+
+    Basic formatting rules are allowed, including:
+
+    * Bold
+    * Italics
+    * Code
+    * Strikethrough
+    * Hyperlinks
+    * Ordered lists
+    * Unordered lists
+
+    The following markdown illustrates a few common styles.
+
+    <pre>
+    **Bold**, *italics*, and ~~strikethrough~~ may be used.
+
+    Ordered lists:
+    1. Item 1
+    1. Item 2
+    1. Item 2.1
+
+    Unordered lists:
+    * Item 1
+    * Item 2
+    * Item 2.1
+    </pre>
+
+    You **CAN NOT** mix ordered and unordered lists when nesting lists. For example this is invalid:
+    <pre>
+    * Item 1
+        1. INVALID Item 1.1
+    * Item 2
+        2. INVALID Item 2.1
+    </pre>
+
+    Additionally, a subset of inline HTML tags are supported for styling.
+
+    * `<span>`
+    * `<sup>`
+    * `<sub>`
+    * `<em>`
+    * `<i>`
+    * `<strong>`
+    * `<b>`
+
+    Supported CSS styles for use with `<span>` elements:
+
+    * `color`
+    * `background-color`
+    * `font-weight: bold`
+    * `font-style: italic`
+    * `text-decoration: underline`
+    * `text-decoration: line-through`
+    * `font-family`
+    * `font-variant: small-caps`
+    * `font-size` (must use points for units)
+
+    You may also use `{style="..."}` [attributes](https://www.npmjs.com/package/markdown-it-attrs)
+    after markdown elements to apply styles. This can be used on headers, inline
+    elements, code blocks, etc.
+
+    ### Code blocks
+
+    Both indented and fenced code blocks are supported, with syntax highlighting.
+
+    The following example renders highlighted code.
+
+    <pre>
+    ### Hello World
+
+    ```javascript
+    console.log('Hello world');
+    ```
+    </pre>
+
+    ### Tables
+
+    Tables are supported via
+    [GFM](https://guides.github.com/features/mastering-markdown/#GitHub-flavored-markdown) syntax.
+
+    Note: Including tables and other block elements on the same slide may produce poor results with
+    overlapping elements. Either avoid or manually adjust the layout after generating the slides.
+
+    The following generates a 2x5 table on the slide.
+
+    <pre>
+    ### Top pets in the United States
+
+    Animal | Number
+    -------|--------
+    Fish   | 142 million
+    Cats   | 88 million
+    Dogs   | 75 million
+    Birds  | 16 million
+    </pre>
+</SPEC>
+
+<REQUIREMENT>
+Only output in the specified format - do not explain your work
+</REQUIREMENT>
+
+<REQUIREMENT>
+Vary the outputted templates to ensure variety in the presentation
+</REQUIREMENT>
+
+<REQUIREMENT>
+Limit the amount of text in each slide to keep the focus on the presentation - fill in the talking track in the speaker notes.
+</REQUIREMENT>
+
+<REQUIREMENT>
+When generating images use the following format:
+
+https://placehold.co/{width}x{height}/{background_color_hex}/{text_color_hex}.png?text={text}
+</REQUIREMENT>
